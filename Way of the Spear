@@ -6,7 +6,7 @@ ClassSubList["wayofthespear"] = {
 			name : "Way of the Spear",
 			minlevel : 3,
 			description : "\n   " + "Your skill with the Spear has increased to the point that your weapon damage increases",
-      additional : levels.map(function (n) {
+                        additional : levels.map(function (n) {
 					if (n < 3) return "1d8";
 					if (n < 11) return "1d10";
 					if (n < 17) return "1d12";
