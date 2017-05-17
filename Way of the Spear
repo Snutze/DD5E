@@ -1,0 +1,76 @@
+ClassSubList["wayofthespear"] = {
+	regExpSearch : /wayofthespear/i,
+	subname : "Way of the Spear",
+	features : {
+		"subclassfeature3" : {
+			name : "Way of the Spear",
+			minlevel : 3,
+			description : "\n   " + "Your skill with the Spear has increased to the point that your weapon damage increases",
+      additional : levels.map(function (n) {
+					if (n < 3) return "1d8";
+					if (n < 11) return "1d10";
+					if (n < 17) return "1d12";
+					return "2d8";
+			}),
+			calcChanges : {
+					atkAdd : ["var monkDie = function(n) {return n < 3 ? 8 : n < 11 ? 10 : n < 17 ? 12 : 16;}; if (classes.known.monk && classes.known.monk.level && theWea && (theWea.monkweapon || (/spear/i).test(theWea.name) || (isMeleeWeapon && (/simple/i).test(theWea.type) && !(/\\b(heavy|(2|two).?hand(ed)?s?)\\b/i).test(theWea.description)))) {var aMonkDie = monkDie(classes.known.monk.level); try {var curDie = eval(fields.Damage_Die.replace('d', '*'));} catch (e) {var curDie = 'x';}; if (isNaN(curDie) || curDie < aMonkDie) {fields.Damage_Die = '1d' + aMonkDie;}; fields.Mod = StrDex;}; ", "I can use either Strength or Dexterity and my Martial Arts damage die in place of the normal damage die for any 'Monk Weapons', which include unarmed strike, shortsword, and any simple melee weapon that is not two-handed or heavy."]
+			}
+		},
+		"subclassfeature3.1" : {
+			name : "Spear Versatility",
+			minlevel : 3,
+			description : "\n   " + "You may choose to deal slashing, piercing, or bludgeoning damage with your spear attacks",
+			}
+		},
+		"subclassfeature3.2" : {
+			name : "Spear Forms",
+			minlevel : 3,
+			description : desc([
+				"As a bonus action, I can choose one of my spear forms and gain its benefit",
+				"I can only have one form on at a time; It stays until I change form, or I'm incapacitated"
+			]),
+			action : ["bonus action", ""]
+		},			
+		"subclassfeature3.3" : {
+			name : "Spear Reflexe",
+			minlevel : 3,
+			description : "\n   " + "When you are wearing no armor and wielding a spear with both hands, your AC is increased by 1",
+			eval : "AddACMisc(1, \"Spear Defense\", \"When wielding a spear with both hands, the class feature Spear Defense gives a +1 bonus to AC\", \"CurrentArmour.known && !ArmourList[CurrentArmour.known].type\")",
+			removeeval : "AddACMisc(0, \"Defense Fighting Style\", \"When wearing armor, the class feature Defense Fighting Style gives a +1 bonus to AC\")"
+		},
+		"subclassfeature3.4" : {
+			name : "Spear Fluidity",
+			minlevel : 3,
+			description : " [1 ki point]" + "\n   " + "You can spend a ki to make an extra attack with your spear.",
+		},
+		"subclassfeature6" : {
+			name : "Spear Adept",
+			minlevel : 6,
+      description : desc([
+        " [2 ki point]" + "\n   " + "Your spear attacks become more dangerous when augmented through your ki. You may select one of the following effects when you make an attack with a spear",
+ 				"Gain advantage on an attack roll",
+				"After making a successful attack on a target, you can, as a reaction make an immediate follow up attack against a creature adjacent to the target, as long as it is in range. This uses your reaction"
+        "Force a hit creature of size large or smaller to make a Str save against your ki save DC. On a failure, the target is knocked prone and takes 1d8 bludgeoning damage",
+      ]),
+      action : ["reaction", ""]
+		},
+		"subclassfeature6.1" : {
+			name : "Spear of Destiny",
+			minlevel : 6,
+			description : "\n   " + "My spear strikes count as magical for overcoming resistances and immunities",
+      calcChanges : {
+					atkAdd : ["if ((/spear/i).test(WeaponName)) {fields.Description += (fields.Description ? '; ' : '') + 'Counts as magical';}; ", "My spear strikes count as magical for overcoming resistances and immunities."]
+     },     
+     "subclassfeature11" : {
+			name : "Whirldwind",
+			minlevel : 11,
+			description : " [2 ki point]" + "\n   " + "You can use your action to make a number of melee attacks against any creatures within range of you, with a separate attack roll for each target, up to your proficiency bonus or your Wisdom modifier (whichever is higher)",
+     },
+     "subclassfeature17" : {
+			name : "One with the Spear",
+			minlevel : 17,
+			description : " [2 ki point]" + "\n   " + "When you are hit by a melee attack, you may use your reaction to reduce the damage by 1d10 + your Dexterity modifier + your Monk Level. If you reduce the damage of the attack to 0, you may make a spear attack against the attacker if you are within range",
+      action : ["reaction", ""]
+		},
+	},
+}
