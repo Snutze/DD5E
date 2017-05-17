@@ -71,6 +71,7 @@ ClassSubList["wayofthespear"] = {
 			minlevel : 17,
 			description : " [2 ki point]" + "\n   " + "When you are hit by a melee attack, you may use your reaction to reduce the damage by 1d10 + your Dexterity modifier + your Monk Level. If you reduce the damage of the attack to 0, you may make a spear attack against the attacker if you are within range",
       action : ["reaction", ""]
-		},
-	},
-}
+		}
+	}
+};
+ClassList.monk.subclasses[1].push("Way of the Spear");
